@@ -38,6 +38,7 @@ import {
 import axios from 'axios';
 import { StatusBar } from '@capacitor/status-bar';
 import { Capacitor } from '@capacitor/core';
+import { Camera, CameraDirection, CameraResultType, CameraSource } from '@capacitor/camera';
 import './App.css';
 
 // Import components
@@ -82,19 +83,13 @@ const Home: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  useEffect(() => {
-    if (Capacitor.isNativePlatform()) {
-      initializeApp();
-    }
-  }, []);
-
   const initializeApp = async () => {
     try {
       await StatusBar.setOverlaysWebView({ overlay: false });
       await StatusBar.setBackgroundColor({ color: '#2196f3' }); // Material Blue
     } catch (error) {
       console.error('StatusBar initialization failed:', error);
-      await StatusBar.setBackgroundColor({ color: '#1565c0' }).catch(() => {}); // fallback
+      await StatusBar.setBackgroundColor({ color: '#1565c0' }).catch(() => { }); // fallback
     }
   };
 
@@ -111,6 +106,9 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     checkApiStatus();
+    if (Capacitor.isNativePlatform()) {
+      initializeApp();
+    }
   }, []);
 
   // Handle file selection
@@ -164,16 +162,27 @@ const Home: React.FC = () => {
   // Start camera
   const startCamera = async () => {
     try {
-      const stream = await navigator.mediaDevices.getUserMedia({
-        video: { facingMode: 'environment' },
+      const image = await Camera.getPhoto({
+        quality: 80,
+        allowEditing: false,
+        resultType: CameraResultType.DataUrl,
+        source: CameraSource.Camera,
+        direction: CameraDirection.Rear,
       });
-      if (videoRef.current) {
-        videoRef.current.srcObject = stream;
-        setCameraActive(true);
+
+      if (image.dataUrl) {
+        const response = await fetch(image.dataUrl);
+        const blob = await response.blob();
+        const file = new File([blob], 'camera-capture.jpg', { type: 'image/jpeg' });
+        handleFileSelect(file);
         setError(null);
       }
     } catch (err) {
-      setError('Camera access denied or not available');
+      if (err && typeof err === 'object' && 'message' in err) {
+        setError('Camera access failed: ' + (err as { message: string }).message);
+      } else {
+        setError('Camera access failed: Unknown error');
+      }
       console.error('Camera error:', err);
     }
   };
@@ -285,9 +294,8 @@ const Home: React.FC = () => {
             {apiStatus && (
               <div className="mt-4">
                 <span
-                  className={`badge rounded-pill px-4 py-2 fs-6 ${
-                    apiStatus.status === 'healthy' ? 'bg-success text-white' : 'bg-danger text-white'
-                  }`}
+                  className={`badge rounded-pill px-4 py-2 fs-6 ${apiStatus.status === 'healthy' ? 'bg-success text-white' : 'bg-danger text-white'
+                    }`}
                 >
                   {apiStatus.status === 'healthy' ? 'API Ready' : 'API Error'}
                   {apiStatus.model_loaded && ' • Model Loaded'}
@@ -307,9 +315,8 @@ const Home: React.FC = () => {
               <IonCardContent className="p-4">
                 {/* Image Upload Area */}
                 <div
-                  className={`file-upload-area border-2 border-dashed rounded-3 p-5 text-center transition-colors ${
-                    dragActive ? 'drag-active' : ''
-                  }`}
+                  className={`file-upload-area border-2 border-dashed rounded-3 p-5 text-center transition-colors ${dragActive ? 'drag-active' : ''
+                    }`}
                   onDragEnter={handleDrag}
                   onDragLeave={handleDrag}
                   onDragOver={handleDrag}
@@ -406,17 +413,16 @@ const Home: React.FC = () => {
                               </IonCardHeader>
                               <IonCardContent>
                                 <IonText
-                                  className={`px-3 py-1 rounded-pill text-sm fw-medium ${
-                                    prediction.is_crimsonsweet
+                                  className={`px-3 py-1 rounded-pill text-sm fw-medium ${prediction.is_crimsonsweet
                                       ? 'bg-success-subtle text-success'
                                       : 'bg-warning-subtle text-warning'
-                                  }`}
+                                    }`}
                                 >
                                   {prediction.variety === 'crimsonsweet'
                                     ? 'Crimsonsweet F1'
                                     : prediction.variety === 'other'
-                                    ? 'Other Variety'
-                                    : 'Unknown'}
+                                      ? 'Other Variety'
+                                      : 'Unknown'}
                                 </IonText>
                               </IonCardContent>
                             </IonCard>
@@ -428,19 +434,18 @@ const Home: React.FC = () => {
                               </IonCardHeader>
                               <IonCardContent>
                                 <IonText
-                                  className={`px-3 py-1 rounded-pill text-sm fw-medium ${
-                                    prediction.ripeness === 'ripe'
+                                  className={`px-3 py-1 rounded-pill text-sm fw-medium ${prediction.ripeness === 'ripe'
                                       ? 'bg-success-subtle text-success'
                                       : prediction.ripeness === 'unripe'
-                                      ? 'bg-warning-subtle text-warning'
-                                      : 'bg-secondary-subtle text-secondary'
-                                  }`}
+                                        ? 'bg-warning-subtle text-warning'
+                                        : 'bg-secondary-subtle text-secondary'
+                                    }`}
                                 >
                                   {prediction.ripeness === 'ripe'
                                     ? 'Ripe'
                                     : prediction.ripeness === 'unripe'
-                                    ? 'Unripe'
-                                    : 'Unknown'}
+                                      ? 'Unripe'
+                                      : 'Unknown'}
                                 </IonText>
                               </IonCardContent>
                             </IonCard>
@@ -464,9 +469,8 @@ const Home: React.FC = () => {
 
                       {/* Validation Status */}
                       <IonCard
-                        className={`mt-4 ${
-                          prediction.is_valid ? 'bg-success-subtle' : 'bg-danger-subtle'
-                        } border-0 rounded-3`}
+                        className={`mt-4 ${prediction.is_valid ? 'bg-success-subtle' : 'bg-danger-subtle'
+                          } border-0 rounded-3`}
                       >
                         <IonCardContent>
                           <div className="d-flex align-items-center">

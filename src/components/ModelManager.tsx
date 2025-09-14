@@ -151,7 +151,7 @@ const ModelManager: React.FC = () => {
         <>
             <IonHeader>
                 <IonToolbar className="watermelon-gradient">
-                    <IonTitle className="fw-bold text-white fs-4">Watermelon Classifier</IonTitle>
+                    <IonTitle className="fw-bold text-dark fs-4">Watermelon Classifier</IonTitle>
                 </IonToolbar>
             </IonHeader>
             <IonContent className="ion-padding bg-light">
