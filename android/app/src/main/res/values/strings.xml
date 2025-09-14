@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Watermelon</string>
+    <string name="title_activity_main">Watermelon</string>
+    <string name="package_name">com.watermelon.classifier</string>
+    <string name="custom_url_scheme">com.watermelon.classifier</string>
+</resources>

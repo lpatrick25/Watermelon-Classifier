@@ -1,0 +1,186 @@
+/* Base styles for App */
+.App {
+  --ion-background-color: #f8f9fa; /* Light gray background inspired by Bootstrap */
+}
+
+/* Custom gradient for watermelon classifier */
+.watermelon-gradient {
+  background: linear-gradient(135deg, #198754, #0f6b43); /* Refined green gradient */
+  color: #ffffff;
+}
+
+/* Confidence bar */
+.confidence-bar {
+  background: linear-gradient(90deg, #dc3545, #ffc107, #198754);
+  border-radius: 0.5rem;
+  height: 8px;
+}
+
+/* Subtle hover effects */
+.drag-active {
+  transform: scale(1.01);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+/* Fade-in animation */
+.fade-in {
+  animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Loading spinner */
+.spinner {
+  border: 3px solid #e9ecef;
+  border-top: 3px solid #198754;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* File upload area */
+.file-upload-area {
+  transition: all 0.3s ease;
+  background: #ffffff;
+  border: 2px dashed #ced4da;
+  border-radius: 0.5rem;
+  padding: 2rem;
+}
+
+.file-upload-area:hover {
+  background: #f8f9fa;
+  border-color: #198754;
+}
+
+.file-upload-area.drag-active {
+  background: #e6f4ea;
+  border-color: #198754;
+  transform: scale(1.01);
+}
+
+/* Custom scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #e9ecef;
+  border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #6c757d;
+  border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #495057;
+}
+
+/* Container styles */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Tab bar active state */
+.ion-tab-button {
+  transition: all 0.2s ease;
+}
+
+.ion-tab-button.tab-selected {
+  background: #e6f4ea;
+  color: #198754 !important;
+}
+
+.ion-tab-button:hover {
+  background: #f8f9fa;
+}
+
+/* ImageClassifier specific styles */
+.image-classifier-card {
+  transition: all 0.3s ease;
+}
+
+.image-classifier-card:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+.video-preview {
+  max-height: 300px;
+  object-fit: cover;
+}
+
+.progress-bar-container {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.progress-bar-label {
+  min-width: 100px;
+  font-size: 0.875rem;
+}
+
+.progress-bar-value {
+  min-width: 50px;
+  font-size: 0.875rem;
+  text-align: right;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .grid-mobile-1 {
+    grid-template-columns: 1fr;
+  }
+
+  .text-mobile-sm {
+    font-size: 0.9rem;
+  }
+
+  .ion-tab-button {
+    padding: 0.5rem;
+  }
+
+  .ion-tab-button .fs-4 {
+    font-size: 1.25rem !important;
+  }
+
+  .ion-tab-button .fs-6 {
+    font-size: 0.75rem !important;
+  }
+
+  .file-upload-area {
+    padding: 1.5rem;
+  }
+
+  .video-preview {
+    max-height: 200px;
+  }
+
+  .progress-bar-label {
+    min-width: 80px;
+    font-size: 0.8rem;
+  }
+
+  .progress-bar-value {
+    min-width: 40px;
+    font-size: 0.8rem;
+  }
+}
