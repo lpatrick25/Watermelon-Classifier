@@ -1015,64 +1015,64 @@ const Home: React.FC = () => {
   );
 };
 
-// const App: React.FC = () => {
-//   return (
-//     <IonApp>
-//       <IonReactRouter>
-//         <IonTabs>
-//           <IonRouterOutlet>
-//             <Route exact path="/classify">
-//               <Home />
-//             </Route>
-//             <Route exact path="/datasets">
-//               <DatasetManager />
-//             </Route>
-//             <Route exact path="/train">
-//               <ModelTrainer />
-//             </Route>
-//             <Route exact path="/models">
-//               <ModelManager />
-//             </Route>
-//             <Route exact path="/">
-//               <Redirect to="/classify" />
-//             </Route>
-//           </IonRouterOutlet>
-//           <IonTabBar slot="bottom" className="shadow-sm border-top bg-white">
-//             <IonTabButton tab="classify" href="/classify" className="nav-link text-dark">
-//               <IonIcon aria-hidden="true" icon={homeOutline} className="fs-4" />
-//               <IonLabel className="fs-6 fw-medium">Classify</IonLabel>
-//             </IonTabButton>
-//             <IonTabButton tab="datasets" href="/datasets" className="nav-link text-dark">
-//               <IonIcon aria-hidden="true" icon={folderOutline} className="fs-4" />
-//               <IonLabel className="fs-6 fw-medium">Datasets</IonLabel>
-//             </IonTabButton>
-//             <IonTabButton tab="train" href="/train" className="nav-link text-dark">
-//               <IonIcon aria-hidden="true" icon={constructOutline} className="fs-4" />
-//               <IonLabel className="fs-6 fw-medium">Train</IonLabel>
-//             </IonTabButton>
-//             <IonTabButton tab="models" href="/models" className="nav-link text-dark">
-//               <IonIcon aria-hidden="true" icon={cubeOutline} className="fs-4" />
-//               <IonLabel className="fs-6 fw-medium">Models</IonLabel>
-//             </IonTabButton>
-//           </IonTabBar>
-//         </IonTabs>
-//       </IonReactRouter>
-//     </IonApp>
-//   );
-// };
 const App: React.FC = () => {
   return (
     <IonApp>
       <IonReactRouter>
-        <Route exact path="/classify">
-          <Home />
-        </Route>
-        <Route exact path="/">
-          <Redirect to="/classify" />
-        </Route>
+        <IonTabs>
+          <IonRouterOutlet>
+            <Route exact path="/classify">
+              <Home />
+            </Route>
+            <Route exact path="/datasets">
+              <DatasetManager />
+            </Route>
+            <Route exact path="/train">
+              <ModelTrainer />
+            </Route>
+            <Route exact path="/models">
+              <ModelManager />
+            </Route>
+            <Route exact path="/">
+              <Redirect to="/classify" />
+            </Route>
+          </IonRouterOutlet>
+          <IonTabBar slot="bottom" className="shadow-sm border-top bg-white">
+            <IonTabButton tab="classify" href="/classify" className="nav-link text-dark">
+              <IonIcon aria-hidden="true" icon={homeOutline} className="fs-4" />
+              <IonLabel className="fs-6 fw-medium">Classify</IonLabel>
+            </IonTabButton>
+            <IonTabButton tab="datasets" href="/datasets" className="nav-link text-dark">
+              <IonIcon aria-hidden="true" icon={folderOutline} className="fs-4" />
+              <IonLabel className="fs-6 fw-medium">Datasets</IonLabel>
+            </IonTabButton>
+            <IonTabButton tab="train" href="/train" className="nav-link text-dark">
+              <IonIcon aria-hidden="true" icon={constructOutline} className="fs-4" />
+              <IonLabel className="fs-6 fw-medium">Train</IonLabel>
+            </IonTabButton>
+            <IonTabButton tab="models" href="/models" className="nav-link text-dark">
+              <IonIcon aria-hidden="true" icon={cubeOutline} className="fs-4" />
+              <IonLabel className="fs-6 fw-medium">Models</IonLabel>
+            </IonTabButton>
+          </IonTabBar>
+        </IonTabs>
       </IonReactRouter>
     </IonApp>
   );
 };
+// const App: React.FC = () => {
+//   return (
+//     <IonApp>
+//       <IonReactRouter>
+//         <Route exact path="/classify">
+//           <Home />
+//         </Route>
+//         <Route exact path="/">
+//           <Redirect to="/classify" />
+//         </Route>
+//       </IonReactRouter>
+//     </IonApp>
+//   );
+// };
 
 export default App;

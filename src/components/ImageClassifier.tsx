@@ -18,7 +18,7 @@ import { cameraOutline, closeCircleOutline, checkmarkCircleOutline } from 'ionic
 import axios from 'axios';
 import '../App.css';
 
-const BACKEND_URL = 'http://192.168.100.8:8502';
+const BACKEND_URL = 'http://192.168.100.70:8502';
 const API = `${BACKEND_URL}/api`;
 
 const ImageClassifier: React.FC = () => {

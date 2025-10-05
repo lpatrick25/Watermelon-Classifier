@@ -23,7 +23,7 @@ import { informationCircleOutline } from 'ionicons/icons';
 import axios from 'axios';
 import '../App.css';
 
-const BACKEND_URL = 'http://192.168.100.8:8502';
+const BACKEND_URL = 'http://192.168.100.70:8502';
 const API = `${BACKEND_URL}/api`;
 
 interface Dataset {
@@ -191,17 +191,17 @@ const DatasetManager: React.FC = () => {
                                     <IonCardContent>
                                         <pre className="text-sm text-info-emphasis">
                                             {`dataset.zip
-├── crimsonsweet_ripe/
+├── valid/
+│   ├── ripe/
+│   │   ├── image1.jpg
+│   │   ├── image2.jpg
+│   │   └── ...
+│   ├── unripe/
+│   │   ├── image1.jpg
+│   │   └── ...
+├── not_valid/
 │   ├── image1.jpg
-│   ├── image2.jpg
-│   └── ...
-├── crimsonsweet_unripe/
-│   ├── image1.jpg
-│   └── ...
-├── other_variety/
-│   └── ...
-└── not_valid/
-    └── ...`}
+│   └── ...`}
                                         </pre>
                                         <IonText color="info" className="text-sm mt-2">
                                             The system will automatically split your data into train/validation/test sets (70/20/10)
